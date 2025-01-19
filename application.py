@@ -24,7 +24,7 @@ def get_drinks():
     drinks = Drink.query.all()
     output = []
     for drink in drinks:
-        drink_data = {'name': drink.name, 'description': drink.description}
+        drink_data = {'id':drink.id, 'name': drink.name, 'description': drink.description}
         
         output.append(drink_data)
         
@@ -42,3 +42,12 @@ def add_drink():
     db.session.add(drink)
     db.session.commit()
     return {'id': drink.id}
+
+@app.route('/drinks/<id>', methods = ['DELETE'])
+def delete_drink(id):
+    drink = Drink.query.get(id)
+    if drink is None:
+        return {"error": "not found"}
+    db.session.delete(drink)
+    db.session.commit()
+    return {"message": f"deleted {drink.name}!"}
