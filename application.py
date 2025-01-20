@@ -8,11 +8,18 @@ db = SQLAlchemy(app)
 
 class Drink(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
-    description = db.Column(db.String(120))
-    
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    category = db.Column(db.String(50))
+    glass_type = db.Column(db.String(50))
+    ingredients = db.Column(db.Text)
+    alcohol_type = db.Column(db.String(50))
+    taste = db.Column(db.String(50))
+    instructions = db.Column(db.Text)
+    measurements = db.Column(db.Text)
+    volume_ml = db.Column(db.Float)
+
     def __repr__(self):
-        return f"{self.name} - {self.description}"
+        return f"<Drink {self.name} ({self.category})>"
 
 
 @app.route('/')
