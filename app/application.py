@@ -1,9 +1,11 @@
 from flask import Flask, request
-app = Flask(__name__) 
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app = Flask(__name__) 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://gzark1:mypassword@localhost/drinkdb'
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)  # Initialize Flask-Migrate
 
 
 class Drink(db.Model):
