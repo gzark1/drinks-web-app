@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_migrate import Migrate
-from models import db, Drink, Ingredient, DrinkIngredient  # Import models
+from app.models import db, Drink, Ingredient, DrinkIngredient  # Import models
 
 # Initialize Flask App
 app = Flask(__name__) 
@@ -66,6 +66,6 @@ def delete_drink(name):
     db.session.commit()
     return jsonify({"message": f"Deleted {drink.name}!"})
 
-# ---------------------- Flask App Run (For Debugging) ----------------------
+# ---------------------- Flask App Run ----------------------
 if __name__ == "__main__":
     app.run(debug=True)
